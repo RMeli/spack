@@ -66,6 +66,8 @@ class Dbcsr(CMakePackage, CudaPackage, ROCmPackage):
     # properties, since the parent class defines constraints for different archs
     # Instead just mark all unsupported cuda archs as conflicting.
     dbcsr_cuda_archs = ("35", "37", "60", "70")
+    with when("@2.5.0"):
+        dbcsr_cuda_archs = (*dbcsr_cuda_archs, "80")
     cuda_msg = "dbcsr only supports cuda_arch {0}".format(dbcsr_cuda_archs)
 
     for arch in CudaPackage.cuda_arch_values:
