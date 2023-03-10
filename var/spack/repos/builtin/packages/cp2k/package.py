@@ -86,6 +86,10 @@ class Cp2k(MakefilePackage, CudaPackage, CMakePackage, ROCmPackage):
     )
     variant("pytorch", default=False, description="Enable libtorch support")
     variant("quip", default=False, description=("Enable quip support"))
+    variant("dlaf", default=False, description="Use DLA-Future")
+    
+    depends_on("dla-future", when="+dlaf")
+    depends_on("dla-future+cuda", when="+dlaf+cuda")
 
     with when("+cuda"):
         variant(
